@@ -29,6 +29,10 @@ public class UIArrastar : MonoBehaviour
 
     List<RaycastResult> listaObj = new List<RaycastResult>();
 
+    private float widthObj;
+
+    private float HeightObj;
+
     private void Start()
     {
         GameObject scroll = GameObject.Find("/Canvas/Scroll View/Viewport/imagens");
@@ -63,6 +67,9 @@ public class UIArrastar : MonoBehaviour
                     copia.SetParent(objetoArrasta.parent);
                     copia.position = posicaoOriginal;
                     copia.localScale = objetoArrasta.localScale;
+
+                    widthObj = copia.GetComponent<RectTransform>().rect.width;
+                    HeightObj = copia.GetComponent<RectTransform>().rect.height;
                 }
                 objetoArrasta.SetParent(containerDesenho);
                 objetoArrastaImg.raycastTarget = false;
@@ -71,7 +78,28 @@ public class UIArrastar : MonoBehaviour
 
         if (isArrasta)
         {
-            objetoArrasta.position = Input.mousePosition;
+            RectTransform obj = objetoArrasta.GetComponent<RectTransform>();
+
+            if (Input.mousePosition.x < scrollView.position.x)
+                obj.sizeDelta = new Vector2(200, 200);
+            else
+                obj.sizeDelta = new Vector2(widthObj, HeightObj);
+
+            // se a borda do objeto ultrapassar o scroll
+            if(((Input.mousePosition.x + (obj.rect.width/2)) >= scrollView.position.x) 
+                    && (Input.mousePosition.x < scrollView.position.x))
+                objetoArrasta.position = new Vector3((Input.mousePosition.x - ((obj.rect.width/2) - (scrollView.position.x - Input.mousePosition.x))), Input.mousePosition.y, Input.mousePosition.z);
+            else if((Input.mousePosition.x <= Input.mousePosition.x)
+                    && (Input.mousePosition.x < (obj.rect.width/2)))
+                objetoArrasta.position = new Vector3((obj.rect.width/2), Input.mousePosition.y, Input.mousePosition.z);
+            else
+                objetoArrasta.position = Input.mousePosition;
+           
+            Debug.Log("arrasta:"+objetoArrasta.position.x);
+            Debug.Log("scroll:"+scrollView.position.x);
+            Debug.Log("widht:"+obj.rect.width);
+            Debug.Log("mouse:"+Input.mousePosition);
+
         }
 
         if (Input.GetMouseButtonUp(0))
@@ -81,13 +109,8 @@ public class UIArrastar : MonoBehaviour
                 objetoArrastaImg.raycastTarget = true;
                
                 if (scrollView != null) {
-                    RectTransform obj1 = (RectTransform)objetoArrasta;
-
-                    if ((obj1.rect.width + objetoArrasta.position.x) >= scrollView.position.x)
-                    {
-
+                    if (Input.mousePosition.x >= scrollView.position.x)
                         Destroy(objetoArrasta.gameObject);
-                    }
                 }
 
                 objetoArrasta = null;
