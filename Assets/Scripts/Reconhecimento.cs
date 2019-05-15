@@ -81,10 +81,10 @@ public class Reconhecimento : MonoBehaviour
     {
         webCamTextureToMatHelper = gameObject.GetComponent<WebCamTextureToMatHelper>();
         
-#if UNITY_ANDROID && !UNITY_EDITOR
-            // Avoids the front camera low light issue that occurs in only some Android devices (e.g. Google Pixel, Pixel2).
-            webCamTextureToMatHelper.avoidAndroidFrontCameraLowLightIssue = true;
-#endif
+        #if UNITY_ANDROID && !UNITY_EDITOR
+                    // Avoids the front camera low light issue that occurs in only some Android devices (e.g. Google Pixel, Pixel2).
+                    webCamTextureToMatHelper.avoidAndroidFrontCameraLowLightIssue = true;
+        #endif
         webCamTextureToMatHelper.Initialize();
     }
 
@@ -95,6 +95,8 @@ public class Reconhecimento : MonoBehaviour
     {
         Debug.Log("OnWebCamTextureToMatHelperInitialized");
 
+        webCamTextureToMatHelper.requestedIsFrontFacing = true;
+
         Mat webCamTextureMat = webCamTextureToMatHelper.GetMat();
 
         texture = new Texture2D(webCamTextureMat.cols(), webCamTextureMat.rows(), TextureFormat.RGBA32, false);
@@ -103,7 +105,7 @@ public class Reconhecimento : MonoBehaviour
 
         gameObject.transform.localScale = new Vector3(webCamTextureMat.cols(), webCamTextureMat.rows(), 1);
 
-        Debug.Log("Screen.width " + Screen.width + " Screen.height " + Screen.height + " Screen.orientation " + Screen.orientation);
+        //Debug.Log("Screen.width " + Screen.width + " Screen.height " + Screen.height + " Screen.orientation " + Screen.orientation);
 
         float width = webCamTextureMat.width();
         float height = webCamTextureMat.height();
@@ -174,7 +176,7 @@ public class Reconhecimento : MonoBehaviour
     {
         if (webCamTextureToMatHelper.IsPlaying() && webCamTextureToMatHelper.DidUpdateThisFrame())
         {
-
+            
             Mat rgbaMat = webCamTextureToMatHelper.GetMat();
 
             if (mMOP2fptsPrev.rows() == 0)
@@ -296,13 +298,5 @@ public class Reconhecimento : MonoBehaviour
     public void OnStopButtonClick()
     {
         webCamTextureToMatHelper.Stop();
-    }
-
-    /// <summary>
-    /// Raises the change camera button click event.
-    /// </summary>
-    public void OnChangeCameraButtonClick()
-    {
-        webCamTextureToMatHelper.requestedIsFrontFacing = !webCamTextureToMatHelper.IsFrontFacing();
     }
 }
