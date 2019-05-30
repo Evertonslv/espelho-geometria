@@ -11,6 +11,7 @@ using OpenCVForUnity.ImgprocModule;
 using OpenCVForUnity.UnityUtils;
 using OpenCVForUnity.UnityUtils.Helper;
 using OpenCVRect = OpenCVForUnity.CoreModule.Rect;
+using OpenCVForUnity.Features2dModule;
 
 [RequireComponent(typeof(WebCamTextureToMatHelper))]
 public class Reconhecimento : MonoBehaviour
@@ -19,6 +20,8 @@ public class Reconhecimento : MonoBehaviour
     /// The gray mat.
     /// </summary>
     Mat grayMat;
+
+    Texture2D imgTexture;
 
     /// <summary>
     /// The texture.
@@ -50,13 +53,14 @@ public class Reconhecimento : MonoBehaviour
     {
         webCamTextureToMatHelper = gameObject.GetComponent<WebCamTextureToMatHelper>();
 
+        imgTexture = Resources.Load("triangulo") as Texture2D;
 
         detector = new QRCodeDetector();
 
-#if UNITY_ANDROID && !UNITY_EDITOR
+        #if UNITY_ANDROID && !UNITY_EDITOR
             // Avoids the front camera low light issue that occurs in only some Android devices (e.g. Google Pixel, Pixel2).
             webCamTextureToMatHelper.avoidAndroidFrontCameraLowLightIssue = true;
-#endif
+        #endif
         webCamTextureToMatHelper.Initialize();
 
     }
@@ -137,48 +141,66 @@ public class Reconhecimento : MonoBehaviour
     {
         if (webCamTextureToMatHelper.IsPlaying() && webCamTextureToMatHelper.DidUpdateThisFrame())
         {
-
+            // Pega imagem
             Mat rgbaMat = webCamTextureToMatHelper.GetMat();
 
-            Imgproc.cvtColor(rgbaMat, grayMat, Imgproc.COLOR_RGBA2GRAY);
+            Mat teste = new Mat();
 
-            bool result = detector.detect(grayMat, points);
+            // Coloca para escala de sinza
+            //Imgproc.cvtColor(rgbaMat, grayMat, Imgproc.COLOR_RGBA2GRAY);
 
-            if (result)
-            {
+            //bool result = detector.detect(grayMat, points);   
 
-                //                    Debug.Log (points.dump ());
+            // Pinta
+            Utils.fastMatToTexture2D(rgbaMat, texture);   
 
-                float[] points_arr = new float[8];
-                points.get(0, 0, points_arr);
+            //Mat img1Mat = rgbaMat;
+           // Utils.texture2DToMat(imgTexture, img1Mat);
+            //Debug.Log("img1Mat.ToString() " + img1Mat.ToString());
 
-                bool decode = true;
-                // Whether all points are in the image area or not.
-                for (int i = 0; i < 8; i = i + 2)
-                {
-                    if (!imageSizeRect.contains(new Point(points_arr[i], points_arr[i + 1])))
-                    {
-                        decode = false;
-                        //                            Debug.Log ("The point exists out of the image area.");
-                        break;
-                    }
-                }
+            //Mat img2Mat = new Mat(imgTexture.height, imgTexture.width, CvType.CV_8UC3);
+            //Utils.texture2DToMat(imgTexture, img2Mat);
 
-                // draw QRCode contour.
-                Imgproc.line(rgbaMat, new Point(points_arr[0], points_arr[1]), new Point(points_arr[2], points_arr[3]), new Scalar(255, 0, 0, 255), 2);
-                Imgproc.line(rgbaMat, new Point(points_arr[2], points_arr[3]), new Point(points_arr[4], points_arr[5]), new Scalar(255, 0, 0, 255), 2);
-                Imgproc.line(rgbaMat, new Point(points_arr[4], points_arr[5]), new Point(points_arr[6], points_arr[7]), new Scalar(255, 0, 0, 255), 2);
-                Imgproc.line(rgbaMat, new Point(points_arr[6], points_arr[7]), new Point(points_arr[0], points_arr[1]), new Scalar(255, 0, 0, 255), 2);
+            //float angle = UnityEngine.Random.Range(0, 360), scale = 1.0f;
 
-                if (decode)
-                {
-                    string decode_info = detector.decode(grayMat, points);
-                    //                        Debug.Log (decode_info);
-                    Imgproc.putText(rgbaMat, "DECODE INFO: " + decode_info, new Point(5, grayMat.rows() - 10), Imgproc.FONT_HERSHEY_SIMPLEX, 0.7, new Scalar(255, 255, 255, 255), 2, Imgproc.LINE_AA, false);
-                }
-            }
+            //Point center = new Point(img2Mat.cols() * 0.5f, img2Mat.rows() * 0.5f);
 
-            Utils.fastMatToTexture2D(rgbaMat, texture);
+            //Mat affine_matrix = Imgproc.getRotationMatrix2D(center, angle, scale);
+
+            //Imgproc.warpAffine(img1Mat, img2Mat, affine_matrix, img2Mat.size());
+            
+                //ORB detector = ORB.create();
+                //ORB extractor = ORB.create();
+
+                //MatOfKeyPoint keypoints1 = new MatOfKeyPoint();
+                //Mat descriptors1 = new Mat();
+
+                //detector.detect(img1Mat, keypoints1);
+                //extractor.compute(img1Mat, keypoints1, descriptors1);
+
+                //MatOfKeyPoint keypoints2 = new MatOfKeyPoint();
+                //Mat descriptors2 = new Mat();
+
+                //detector.detect(img2Mat, keypoints2);
+                //extractor.compute(img2Mat, keypoints2, descriptors2);
+
+
+                //DescriptorMatcher matcher = DescriptorMatcher.create(DescriptorMatcher.BRUTEFORCE_HAMMINGLUT);
+                //MatOfDMatch matches = new MatOfDMatch();
+
+                //matcher.match(descriptors1, descriptors2, matches);
+
+
+                //Mat resultImg = new Mat();
+
+                //Features2d.drawMatches(img1Mat, keypoints1, img2Mat, keypoints2, matches, resultImg);
+
+
+                //Texture2D texture = new Texture2D(resultImg.cols(), resultImg.rows(), TextureFormat.RGBA32, false);
+
+                //Utils.matToTexture2D(resultImg, texture);
+
+              //  gameObject.GetComponent<Renderer>().material.mainTexture = texture;
         }
     }
 
