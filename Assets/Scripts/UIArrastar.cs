@@ -119,7 +119,18 @@ public class UIArrastar : MonoBehaviour
                 objetoArrastaImg.raycastTarget = true;
                
                 if (scrollView != null) {
-                    if (Input.mousePosition.x >= scrollView.position.x)
+                    //GameObject objLixeira = GameObject.Find("/Canvas/Scroll View/Viewport/imagens/lixeira");
+                    var obj = Component.FindObjectsOfType<Image>().ToList().Find( x=>x.name == "lixeira");
+                    RectTransform lixo = obj.GetComponent<RectTransform>();
+
+                    Debug.Log("lixo x:"+lixo.position.x);
+                    Debug.Log("mouse x:"+Input.mousePosition.x);
+                    Debug.Log("lixo y:"+(lixo.position.y + lixo.rect.height));
+                    Debug.Log("lixo y:"+(lixo.position.y));
+                    Debug.Log("mouse y:"+Input.mousePosition.y);
+
+                    if (Input.mousePosition.x > lixo.position.x && 
+                            Input.mousePosition.y < (lixo.position.y + lixo.rect.height))
                         Destroy(objetoArrasta.gameObject);
                 }
 
