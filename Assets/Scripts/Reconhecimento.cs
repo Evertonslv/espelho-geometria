@@ -1,70 +1,27 @@
-﻿using UnityEngine;
+﻿#if !(UNITY_LUMIN && !UNITY_EDITOR)
+
+using UnityEngine;
 using UnityEngine.SceneManagement;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using OpenCVForUnity.CoreModule;
+using OpenCVForUnity.ObjdetectModule;
 using OpenCVForUnity.ImgprocModule;
-using OpenCVForUnity.VideoModule;
 using OpenCVForUnity.UnityUtils;
 using OpenCVForUnity.UnityUtils.Helper;
+using OpenCVRect = OpenCVForUnity.CoreModule.Rect;
+using OpenCVForUnity.Features2dModule;
 
 [RequireComponent(typeof(WebCamTextureToMatHelper))]
 public class Reconhecimento : MonoBehaviour
 {
     /// <summary>
-    /// The mat op flow this.
+    /// The gray mat.
     /// </summary>
-    Mat matOpFlowThis;
+    Mat grayMat;
 
-    /// <summary>
-    /// The mat op flow previous.
-    /// </summary>
-    Mat matOpFlowPrev;
-
-    /// <summary>
-    /// The i GFFT max.
-    /// </summary>
-    int iGFFTMax = 40;
-
-    /// <summary>
-    /// The MO pcorners.
-    /// </summary>
-    MatOfPoint MOPcorners;
-
-    /// <summary>
-    /// The m MO p2fpts this.
-    /// </summary>
-    MatOfPoint2f mMOP2fptsThis;
-
-    /// <summary>
-    /// The m MO p2fpts previous.
-    /// </summary>
-    MatOfPoint2f mMOP2fptsPrev;
-
-    /// <summary>
-    /// The m MO p2fpts safe.
-    /// </summary>
-    MatOfPoint2f mMOP2fptsSafe;
-
-    /// <summary>
-    /// The m MOB status.
-    /// </summary>
-    MatOfByte mMOBStatus;
-
-    /// <summary>
-    /// The m MO ferr.
-    /// </summary>
-    MatOfFloat mMOFerr;
-
-    /// <summary>
-    /// The color red.
-    /// </summary>
-    Scalar colorRed = new Scalar(255, 0, 0, 255);
-
-    /// <summary>
-    /// The i line thickness.
-    /// </summary>
-    int iLineThickness = 3;
+    Texture2D imgTexture;
 
     /// <summary>
     /// The texture.
@@ -72,7 +29,22 @@ public class Reconhecimento : MonoBehaviour
     Texture2D texture;
 
     /// <summary>
-    /// The web cam texture to mat helper.
+    /// The QRCode detector.
+    /// </summary>
+    QRCodeDetector detector;
+
+    /// <summary>
+    /// The points.
+    /// </summary>
+    Mat points;
+
+    /// <summary>
+    /// The image size rect.
+    /// </summary>
+    OpenCVRect imageSizeRect;
+
+    /// <summary>
+    /// The webcam texture to mat helper.
     /// </summary>
     WebCamTextureToMatHelper webCamTextureToMatHelper;
 
@@ -80,12 +52,17 @@ public class Reconhecimento : MonoBehaviour
     void Start()
     {
         webCamTextureToMatHelper = gameObject.GetComponent<WebCamTextureToMatHelper>();
-        
-#if UNITY_ANDROID && !UNITY_EDITOR
+
+        imgTexture = Resources.Load("triangulo") as Texture2D;
+
+        detector = new QRCodeDetector();
+
+        #if UNITY_ANDROID && !UNITY_EDITOR
             // Avoids the front camera low light issue that occurs in only some Android devices (e.g. Google Pixel, Pixel2).
             webCamTextureToMatHelper.avoidAndroidFrontCameraLowLightIssue = true;
-#endif
+        #endif
         webCamTextureToMatHelper.Initialize();
+
     }
 
     /// <summary>
@@ -102,7 +79,6 @@ public class Reconhecimento : MonoBehaviour
         gameObject.GetComponent<Renderer>().material.mainTexture = texture;
 
         gameObject.transform.localScale = new Vector3(webCamTextureMat.cols(), webCamTextureMat.rows(), 1);
-
         Debug.Log("Screen.width " + Screen.width + " Screen.height " + Screen.height + " Screen.orientation " + Screen.orientation);
 
         float width = webCamTextureMat.width();
@@ -119,14 +95,16 @@ public class Reconhecimento : MonoBehaviour
             Camera.main.orthographicSize = height / 2;
         }
 
-        matOpFlowThis = new Mat();
-        matOpFlowPrev = new Mat();
-        MOPcorners = new MatOfPoint();
-        mMOP2fptsThis = new MatOfPoint2f();
-        mMOP2fptsPrev = new MatOfPoint2f();
-        mMOP2fptsSafe = new MatOfPoint2f();
-        mMOBStatus = new MatOfByte();
-        mMOFerr = new MatOfFloat();
+        grayMat = new Mat(webCamTextureMat.rows(), webCamTextureMat.cols(), CvType.CV_8UC1);
+        imageSizeRect = new OpenCVRect(0, 0, grayMat.width(), grayMat.height());
+
+        points = new Mat();
+
+        // if WebCamera is frontFaceing, flip Mat.
+        if (webCamTextureToMatHelper.GetWebCamDevice().isFrontFacing)
+        {
+            webCamTextureToMatHelper.flipHorizontal = true;
+        }
     }
 
     /// <summary>
@@ -136,28 +114,17 @@ public class Reconhecimento : MonoBehaviour
     {
         Debug.Log("OnWebCamTextureToMatHelperDisposed");
 
+        if (grayMat != null)
+            grayMat.Dispose();
+
         if (texture != null)
         {
             Texture2D.Destroy(texture);
             texture = null;
         }
 
-        if (matOpFlowThis != null)
-            matOpFlowThis.Dispose();
-        if (matOpFlowPrev != null)
-            matOpFlowPrev.Dispose();
-        if (MOPcorners != null)
-            MOPcorners.Dispose();
-        if (mMOP2fptsThis != null)
-            mMOP2fptsThis.Dispose();
-        if (mMOP2fptsPrev != null)
-            mMOP2fptsPrev.Dispose();
-        if (mMOP2fptsSafe != null)
-            mMOP2fptsSafe.Dispose();
-        if (mMOBStatus != null)
-            mMOBStatus.Dispose();
-        if (mMOFerr != null)
-            mMOFerr.Dispose();
+        if (points != null)
+            points.Dispose();
     }
 
     /// <summary>
@@ -174,87 +141,66 @@ public class Reconhecimento : MonoBehaviour
     {
         if (webCamTextureToMatHelper.IsPlaying() && webCamTextureToMatHelper.DidUpdateThisFrame())
         {
-
+            // Pega imagem
             Mat rgbaMat = webCamTextureToMatHelper.GetMat();
 
-            if (mMOP2fptsPrev.rows() == 0)
-            {
+            Mat teste = new Mat();
 
-                // first time through the loop so we need prev and this mats
-                // plus prev points
-                // get this mat
-                Imgproc.cvtColor(rgbaMat, matOpFlowThis, Imgproc.COLOR_RGBA2GRAY);
+            // Coloca para escala de sinza
+            //Imgproc.cvtColor(rgbaMat, grayMat, Imgproc.COLOR_RGBA2GRAY);
 
-                // copy that to prev mat
-                matOpFlowThis.copyTo(matOpFlowPrev);
+            //bool result = detector.detect(grayMat, points);   
 
-                // get prev corners
-                Imgproc.goodFeaturesToTrack(matOpFlowPrev, MOPcorners, iGFFTMax, 0.05, 20);
-                mMOP2fptsPrev.fromArray(MOPcorners.toArray());
+            // Pinta
+            Utils.fastMatToTexture2D(rgbaMat, texture);   
 
-                // get safe copy of this corners
-                mMOP2fptsPrev.copyTo(mMOP2fptsSafe);
-            }
-            else
-            {
-                // we've been through before so
-                // this mat is valid. Copy it to prev mat
-                matOpFlowThis.copyTo(matOpFlowPrev);
+            //Mat img1Mat = rgbaMat;
+           // Utils.texture2DToMat(imgTexture, img1Mat);
+            //Debug.Log("img1Mat.ToString() " + img1Mat.ToString());
 
-                // get this mat
-                Imgproc.cvtColor(rgbaMat, matOpFlowThis, Imgproc.COLOR_RGBA2GRAY);
+            //Mat img2Mat = new Mat(imgTexture.height, imgTexture.width, CvType.CV_8UC3);
+            //Utils.texture2DToMat(imgTexture, img2Mat);
 
-                // get the corners for this mat
-                Imgproc.goodFeaturesToTrack(matOpFlowThis, MOPcorners, iGFFTMax, 0.05, 20);
-                mMOP2fptsThis.fromArray(MOPcorners.toArray());
+            //float angle = UnityEngine.Random.Range(0, 360), scale = 1.0f;
 
-                // retrieve the corners from the prev mat
-                // (saves calculating them again)
-                mMOP2fptsSafe.copyTo(mMOP2fptsPrev);
+            //Point center = new Point(img2Mat.cols() * 0.5f, img2Mat.rows() * 0.5f);
 
-                // and save this corners for next time through
+            //Mat affine_matrix = Imgproc.getRotationMatrix2D(center, angle, scale);
 
-                mMOP2fptsThis.copyTo(mMOP2fptsSafe);
-            }
+            //Imgproc.warpAffine(img1Mat, img2Mat, affine_matrix, img2Mat.size());
+            
+                //ORB detector = ORB.create();
+                //ORB extractor = ORB.create();
+
+                //MatOfKeyPoint keypoints1 = new MatOfKeyPoint();
+                //Mat descriptors1 = new Mat();
+
+                //detector.detect(img1Mat, keypoints1);
+                //extractor.compute(img1Mat, keypoints1, descriptors1);
+
+                //MatOfKeyPoint keypoints2 = new MatOfKeyPoint();
+                //Mat descriptors2 = new Mat();
+
+                //detector.detect(img2Mat, keypoints2);
+                //extractor.compute(img2Mat, keypoints2, descriptors2);
 
 
-            /*
-                Parameters:
-                    prevImg first 8-bit input image
-                    nextImg second input image
-                    prevPts vector of 2D points for which the flow needs to be found; point coordinates must be single-precision floating-point numbers.
-                    nextPts output vector of 2D points (with single-precision floating-point coordinates) containing the calculated new positions of input features in the second image; when OPTFLOW_USE_INITIAL_FLOW flag is passed, the vector must have the same size as in the input.
-                    status output status vector (of unsigned chars); each element of the vector is set to 1 if the flow for the corresponding features has been found, otherwise, it is set to 0.
-                    err output vector of errors; each element of the vector is set to an error for the corresponding feature, type of the error measure can be set in flags parameter; if the flow wasn't found then the error is not defined (use the status parameter to find such cases).
-            */
-            Video.calcOpticalFlowPyrLK(matOpFlowPrev, matOpFlowThis, mMOP2fptsPrev, mMOP2fptsThis, mMOBStatus, mMOFerr);
+                //DescriptorMatcher matcher = DescriptorMatcher.create(DescriptorMatcher.BRUTEFORCE_HAMMINGLUT);
+                //MatOfDMatch matches = new MatOfDMatch();
 
-            if (mMOBStatus.rows() > 0)
-            {
-                List<Point> cornersPrev = mMOP2fptsPrev.toList();
-                List<Point> cornersThis = mMOP2fptsThis.toList();
-                List<byte> byteStatus = mMOBStatus.toList();
+                //matcher.match(descriptors1, descriptors2, matches);
 
-                int x = 0;
-                int y = byteStatus.Count - 1;
 
-                for (x = 0; x < y; x++)
-                {
-                    if (byteStatus[x] == 1)
-                    {
-                        Point pt = cornersThis[x];
-                        Point pt2 = cornersPrev[x];
+                //Mat resultImg = new Mat();
 
-                        Imgproc.circle(rgbaMat, pt, 5, colorRed, iLineThickness - 1);
+                //Features2d.drawMatches(img1Mat, keypoints1, img2Mat, keypoints2, matches, resultImg);
 
-                        Imgproc.line(rgbaMat, pt, pt2, colorRed, iLineThickness);
-                    }
-                }
-            }
 
-            //                Imgproc.putText (rgbaMat, "W:" + rgbaMat.width () + " H:" + rgbaMat.height () + " SO:" + Screen.orientation, new Point (5, rgbaMat.rows () - 10), Imgproc.FONT_HERSHEY_SIMPLEX, 1.0, new Scalar (255, 255, 255, 255), 2, Imgproc.LINE_AA, false);
+                //Texture2D texture = new Texture2D(resultImg.cols(), resultImg.rows(), TextureFormat.RGBA32, false);
 
-            Utils.fastMatToTexture2D(rgbaMat, texture);
+                //Utils.matToTexture2D(resultImg, texture);
+
+              //  gameObject.GetComponent<Renderer>().material.mainTexture = texture;
         }
     }
 
@@ -264,6 +210,9 @@ public class Reconhecimento : MonoBehaviour
     void OnDestroy()
     {
         webCamTextureToMatHelper.Dispose();
+
+        if (detector != null)
+            detector.Dispose();
     }
 
     /// <summary>
@@ -306,3 +255,5 @@ public class Reconhecimento : MonoBehaviour
         webCamTextureToMatHelper.requestedIsFrontFacing = !webCamTextureToMatHelper.IsFrontFacing();
     }
 }
+
+#endif
