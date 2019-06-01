@@ -11,10 +11,4 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Tela2.unity
     guid: 34f58209652579e4fa315004750ab464
-  - enabled: 1
-    path: Assets/Scenes/Tela Error.unity
-    guid: ef656d9c1aa3e8c409fe82651474860b
-  - enabled: 1
-    path: Assets/Scenes/Tela Accept.unity
-    guid: 0b28d0eea4cc4364997861deff5b2e33
   m_configObjects: {}
