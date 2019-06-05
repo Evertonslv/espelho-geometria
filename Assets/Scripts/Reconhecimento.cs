@@ -12,8 +12,8 @@ public class Reconhecimento : MonoBehaviour
         //Texture2D tempTexture = Resources.Load("circulo") as Texture2D;
         Mat imgMat = new Mat(texture.height, texture.width, CvType.CV_8UC4);
         Mat tempMat = new Mat(texture2.height, texture2.width, CvType.CV_8UC4);
-        Utils.texture2DToMat(texture, tempMat);
-        Utils.texture2DToMat(texture2, imgMat);
+        Utils.texture2DToMat(texture, imgMat);
+        Utils.texture2DToMat(texture2, tempMat);
 
         Imgproc.threshold(imgMat, imgMat, 0.8, 1.0, Imgproc.THRESH_TOZERO);
         Imgproc.threshold(tempMat, tempMat, 0.8, 1.0, Imgproc.THRESH_TOZERO);

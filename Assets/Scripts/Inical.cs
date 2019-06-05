@@ -16,11 +16,14 @@ public class Inical : MonoBehaviour
         SceneManager.LoadScene("Tela2");
     }
 
-    public void analizarImagemBtn(camera camera, Texture2D containerImgs)
+    public void analizarImagemBtn(camera camera)
     {
         Reconhecimento rec = new Reconhecimento();
+        
+        Texture2D containerImgs = ScreenCapture.CaptureScreenshotAsTexture();
+       // containerImgs.width = containerImgs.width - 80;
 
-        if(rec.verificaImagem(camera.getTextura(), containerImgs))
+        if (containerImgs != null && rec.verificaImagem(camera.getTextura(), containerImgs))
             SceneManager.LoadScene("Tela Accept");
         else
             SceneManager.LoadScene("Tela Error");

@@ -164,9 +164,4 @@ public class UIArrastar : MonoBehaviour
 
         return null;
     }
-
-    public Texture2D getContainerImgs()
-    {
-        return this.containerDesenho.GetComponent<Texture2D>();
-    }
 }
