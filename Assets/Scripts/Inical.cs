@@ -6,7 +6,10 @@ using UnityEngine.SceneManagement;
 public class Inical : MonoBehaviour
 {
 
+    GameObject scroll = null;
+
     void Start() {
+        scroll = GameObject.Find("/Canvas/Scroll View");
     }
 
     // Update is called once per frame
@@ -19,18 +22,14 @@ public class Inical : MonoBehaviour
 
     public void analizarImagemBtn(camera camera)
     {
-        Reconhecimento rec = new Reconhecimento();
-
-        GameObject scroll = GameObject.Find("/Canvas/Scroll View");
         scroll.SetActive(false);
         Texture2D textura = camera.getTextura();
         camera.OnWebCamTextureToMatHelperDisposed();
              
         Texture2D containerImgs = ScreenCapture.CaptureScreenshotAsTexture();
         ScreenCapture.CaptureScreenshot("teste.png", 2);
-       // containerImgs.width = containerImgs.width - 80;
 
-        if (containerImgs != null && rec.verificaImagem(textura, containerImgs))
+        if (containerImgs != null && new Reconhecimento().verificaImagem(textura, containerImgs))
             SceneManager.LoadScene("Tela Accept");
         else
             SceneManager.LoadScene("Tela Error");
