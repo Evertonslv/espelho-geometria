@@ -21,6 +21,7 @@ public class Inical : MonoBehaviour
         Reconhecimento rec = new Reconhecimento();
         
         Texture2D containerImgs = ScreenCapture.CaptureScreenshotAsTexture();
+        ScreenCapture.CaptureScreenshot("teste.png", 2);
        // containerImgs.width = containerImgs.width - 80;
 
         if (containerImgs != null && rec.verificaImagem(camera.getTextura(), containerImgs))
