@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-
+using System.Linq;
 public class Inical : MonoBehaviour
 {
 
@@ -22,16 +22,22 @@ public class Inical : MonoBehaviour
 
     public void analizarImagemBtn(camera camera)
     {
-        scroll.SetActive(false);
-        Texture2D textura = camera.getTextura();
-        camera.OnWebCamTextureToMatHelperDisposed();
+        SpriteRenderer spriteAguarde = Component.FindObjectsOfType<SpriteRenderer>().ToList().Find( x=>x.name == "sprite_aguardando");
+        
+        // scroll.SetActive(false);
+        // Texture2D textura = camera.getTextura();
+        // camera.OnWebCamTextureToMatHelperDisposed();
              
-        Texture2D containerImgs = ScreenCapture.CaptureScreenshotAsTexture();
-        ScreenCapture.CaptureScreenshot("teste.png", 2);
+        // Texture2D containerImgs = ScreenCapture.CaptureScreenshotAsTexture();
+        // ScreenCapture.CaptureScreenshot("teste.png", 2);
+        
+        spriteAguarde.enabled = true;
+    
+        // var verificaImagem = new Reconhecimento().verificaImagem(textura, containerImgs);
 
-        if (containerImgs != null && new Reconhecimento().verificaImagem(textura, containerImgs))
-            SceneManager.LoadScene("Tela Accept");
-        else
-            SceneManager.LoadScene("Tela Error");
+        // if (containerImgs != null && verificaImagem)
+        //     SceneManager.LoadScene("Tela Accept");
+        // else
+        //     SceneManager.LoadScene("Tela Error");
     }
 }
