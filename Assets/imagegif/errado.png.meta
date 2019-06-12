@@ -1,21 +1,34 @@
 fileFormatVersion: 2
-guid: 44f05559c56013645b1f1830359b3989
+guid: b46005c231266f64684a30947cae7782
 TextureImporter:
   fileIDToRecycleName:
-    21300000: bob_esponja_chorando_0
-    21300002: bob_esponja_chorando_1
-    21300004: bob_esponja_chorando_2
-    21300006: bob_esponja_chorando_3
-    21300008: bob_esponja_chorando_4
-    21300010: bob_esponja_chorando_5
-    21300012: bob_esponja_chorando_6
-    21300014: bob_esponja_chorando_7
-    21300016: bob_esponja_chorando_8
-    21300018: bob_esponja_chorando_9
-    21300020: bob_esponja_chorando_10
-    21300022: bob_esponja_chorando_11
-    21300024: bob_esponja_chorando_12
-    21300026: bob_esponja_chorando_13
+    21300000: ezgif.com-gif-maker (2)_0
+    21300002: ezgif.com-gif-maker (2)_1
+    21300004: ezgif.com-gif-maker (2)_2
+    21300006: ezgif.com-gif-maker (2)_3
+    21300008: ezgif.com-gif-maker (2)_4
+    21300010: ezgif.com-gif-maker (2)_5
+    21300012: ezgif.com-gif-maker (2)_6
+    21300014: ezgif.com-gif-maker (2)_7
+    21300016: ezgif.com-gif-maker (2)_8
+    21300018: ezgif.com-gif-maker (2)_9
+    21300020: ezgif.com-gif-maker (2)_10
+    21300022: ezgif.com-gif-maker (2)_11
+    21300024: ezgif.com-gif-maker (2)_12
+    21300026: ezgif.com-gif-maker (2)_13
+    21300028: ezgif.com-gif-maker (2)_14
+    21300030: errado_0
+    21300032: errado_1
+    21300034: errado_2
+    21300036: errado_3
+    21300038: errado_4
+    21300040: errado_5
+    21300042: errado_6
+    21300044: errado_7
+    21300046: errado_8
+    21300048: errado_9
+    21300050: errado_10
+    21300052: errado_11
   externalObjects: {}
   serializedVersion: 9
   mipmaps:
@@ -46,7 +59,7 @@ TextureImporter:
   textureSettings:
     serializedVersion: 2
     filterMode: -1
-    aniso: 1
+    aniso: -1
     mipBias: -100
     wrapU: 1
     wrapV: 1
@@ -75,9 +88,9 @@ TextureImporter:
   - serializedVersion: 2
     buildTarget: DefaultTexturePlatform
     maxTextureSize: 2048
-    resizeAlgorithm: 1
+    resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 2
+    textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -86,9 +99,9 @@ TextureImporter:
   - serializedVersion: 2
     buildTarget: Standalone
     maxTextureSize: 2048
-    resizeAlgorithm: 1
+    resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 2
+    textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -97,9 +110,9 @@ TextureImporter:
   - serializedVersion: 2
     buildTarget: iPhone
     maxTextureSize: 2048
-    resizeAlgorithm: 1
+    resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 2
+    textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -108,9 +121,9 @@ TextureImporter:
   - serializedVersion: 2
     buildTarget: Android
     maxTextureSize: 2048
-    resizeAlgorithm: 1
+    resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 2
+    textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -119,9 +132,9 @@ TextureImporter:
   - serializedVersion: 2
     buildTarget: Windows Store Apps
     maxTextureSize: 2048
-    resizeAlgorithm: 1
+    resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 2
+    textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -130,9 +143,9 @@ TextureImporter:
   - serializedVersion: 2
     buildTarget: WebGL
     maxTextureSize: 2048
-    resizeAlgorithm: 1
+    resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 2
+    textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -142,13 +155,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: bob_esponja_chorando_0
+      name: errado_0
       rect:
         serializedVersion: 2
         x: 0
-        y: 480
-        width: 240
-        height: 240
+        y: 1332
+        width: 888
+        height: 666
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -156,19 +169,19 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: bb3a5d05d2e79a244888326741e1b098
+      spriteID: cff4404f21f57fb42bcac9e91a11b677
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: bob_esponja_chorando_1
+      name: errado_1
       rect:
         serializedVersion: 2
-        x: 240
-        y: 480
-        width: 240
-        height: 240
+        x: 888
+        y: 1332
+        width: 888
+        height: 666
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -176,19 +189,19 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7db51a21879b1a9449c501a8acca6f6f
+      spriteID: 13401e9722fcf634aa8096c20c0f5308
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: bob_esponja_chorando_2
+      name: errado_2
       rect:
         serializedVersion: 2
-        x: 480
-        y: 480
-        width: 240
-        height: 240
+        x: 1776
+        y: 1332
+        width: 888
+        height: 666
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -196,19 +209,19 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ffbf475e6e60516418b697a33b117da1
+      spriteID: 02275bc95f2ffe744bdf7739ee7b9e92
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: bob_esponja_chorando_3
+      name: errado_3
       rect:
         serializedVersion: 2
-        x: 720
-        y: 480
-        width: 240
-        height: 240
+        x: 2664
+        y: 1332
+        width: 888
+        height: 666
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -216,19 +229,19 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e1de6134cd4d2024db8b3e20ad958d5d
+      spriteID: e3d80601e829b444db209edaaa6eed4c
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: bob_esponja_chorando_4
+      name: errado_4
       rect:
         serializedVersion: 2
-        x: 960
-        y: 480
-        width: 240
-        height: 240
+        x: 3552
+        y: 1332
+        width: 888
+        height: 666
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -236,119 +249,19 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ce7d340e5a5dee4479c70caca40245cc
+      spriteID: 613b03667f800c24b905e7b25f0d6f91
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: bob_esponja_chorando_5
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 240
-        width: 240
-        height: 240
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 8c902b5e8a56c9d47ba9ae275977cb0f
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: bob_esponja_chorando_6
-      rect:
-        serializedVersion: 2
-        x: 240
-        y: 240
-        width: 240
-        height: 240
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: f8c441f993d3ebe4cb90a71240948ef1
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: bob_esponja_chorando_7
-      rect:
-        serializedVersion: 2
-        x: 480
-        y: 240
-        width: 240
-        height: 240
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: ecdf4a65698aacc439802d2edfc67381
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: bob_esponja_chorando_8
-      rect:
-        serializedVersion: 2
-        x: 720
-        y: 240
-        width: 240
-        height: 240
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 6b6f860cb33325a45be1ad6fca11a920
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: bob_esponja_chorando_9
-      rect:
-        serializedVersion: 2
-        x: 960
-        y: 240
-        width: 240
-        height: 240
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: a1cc62d0cc3f68a4db1314276f2122ec
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: bob_esponja_chorando_10
+      name: errado_5
       rect:
         serializedVersion: 2
         x: 0
-        y: 0
-        width: 240
-        height: 240
+        y: 666
+        width: 888
+        height: 666
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -356,19 +269,19 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1b1145971e15eb34fa04ba4c366c4d2d
+      spriteID: d8d1bc0565d78e742ad0a684fce10e9c
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: bob_esponja_chorando_11
+      name: errado_6
       rect:
         serializedVersion: 2
-        x: 240
-        y: 0
-        width: 240
-        height: 240
+        x: 888
+        y: 666
+        width: 888
+        height: 666
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -376,19 +289,19 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6f91eb24dbf138c4abd0d034bc9f29c6
+      spriteID: 7fa76d41f59d90a409f52a050c24302a
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: bob_esponja_chorando_12
+      name: errado_7
       rect:
         serializedVersion: 2
-        x: 480
-        y: 0
-        width: 240
-        height: 240
+        x: 1776
+        y: 666
+        width: 888
+        height: 666
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -396,19 +309,19 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 57162b53bfa295841be3b4948b863841
+      spriteID: 7cf43b3539a76dc43812089e04a2f09b
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: bob_esponja_chorando_13
+      name: errado_8
       rect:
         serializedVersion: 2
-        x: 720
-        y: 0
-        width: 240
-        height: 240
+        x: 2664
+        y: 666
+        width: 888
+        height: 666
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -416,7 +329,67 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 77a9031013026ea4688437a7b8bb9883
+      spriteID: 782a35b039cd4e547b65e6874a981585
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: errado_9
+      rect:
+        serializedVersion: 2
+        x: 3552
+        y: 666
+        width: 888
+        height: 666
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 476e3b32353ff644b9baef146a54d6fb
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: errado_10
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 888
+        height: 666
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cb78e041a9423474e8465de786b484c9
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: errado_11
+      rect:
+        serializedVersion: 2
+        x: 888
+        y: 0
+        width: 888
+        height: 666
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1ae5da33379fc4849a91bedef5f8512a
       vertices: []
       indices: 
       edges: []
@@ -424,7 +397,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: dbb0d114b7b234544b226358dedf9086
+    spriteID: ae3cd2e713892b044b3790c64ce153f4
     vertices: []
     indices: 
     edges: []

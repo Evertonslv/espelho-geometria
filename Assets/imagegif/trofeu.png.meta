@@ -1,22 +1,22 @@
 fileFormatVersion: 2
-guid: 73cb18f4bb9fd354ba3dc8c2a660eb5a
+guid: 8c44748d5bb6864458ecbb60695f2e1e
 TextureImporter:
   fileIDToRecycleName:
-    21300000: bob_esponja_dancando_0
-    21300002: bob_esponja_dancando_1
-    21300004: bob_esponja_dancando_2
-    21300006: bob_esponja_dancando_3
-    21300008: bob_esponja_dancando_4
-    21300010: bob_esponja_dancando_5
-    21300012: bob_esponja_dancando_6
-    21300014: bob_esponja_dancando_7
-    21300016: bob_esponja_dancando_8
-    21300018: bob_esponja_dancando_9
-    21300020: bob_esponja_dancando_10
-    21300022: bob_esponja_dancando_11
-    21300024: bob_esponja_dancando_12
-    21300026: bob_esponja_dancando_13
-    21300028: bob_esponja_dancando_14
+    21300000: trofeu_0
+    21300002: trofeu_1
+    21300004: trofeu_2
+    21300006: trofeu_3
+    21300008: trofeu_4
+    21300010: trofeu_5
+    21300012: trofeu_6
+    21300014: trofeu_7
+    21300016: trofeu_8
+    21300018: trofeu_9
+    21300020: trofeu_10
+    21300022: trofeu_11
+    21300024: trofeu_12
+    21300026: trofeu_13
+    21300028: trofeu_14
   externalObjects: {}
   serializedVersion: 9
   mipmaps:
@@ -143,13 +143,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: bob_esponja_dancando_0
+      name: trofeu_0
       rect:
         serializedVersion: 2
         x: 0
-        y: 740
-        width: 500
-        height: 370
+        y: 500
+        width: 250
+        height: 250
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -157,19 +157,39 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1f2d4dca960736643b5ddf6509668380
+      spriteID: 8c35a61b5e11a0940b73b7634e9748d7
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: bob_esponja_dancando_1
+      name: trofeu_1
+      rect:
+        serializedVersion: 2
+        x: 250
+        y: 500
+        width: 250
+        height: 250
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2486b67e28d2fb246bddb35fa553015b
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: trofeu_2
       rect:
         serializedVersion: 2
         x: 500
-        y: 740
-        width: 500
-        height: 370
+        y: 500
+        width: 250
+        height: 250
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -177,19 +197,39 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 9c015d883730566448145d8210417859
+      spriteID: 41d0b8822f8953d4f8053faca5b2d85a
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: bob_esponja_dancando_2
+      name: trofeu_3
+      rect:
+        serializedVersion: 2
+        x: 750
+        y: 500
+        width: 250
+        height: 250
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 883492e56f17eb4488ff8c351882646b
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: trofeu_4
       rect:
         serializedVersion: 2
         x: 1000
-        y: 740
-        width: 500
-        height: 370
+        y: 500
+        width: 250
+        height: 250
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -197,59 +237,19 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f6fd3788d095dec41904b727d97cbd9d
+      spriteID: 7e99b158668c2c44184b59e5b7d3ee84
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: bob_esponja_dancando_3
-      rect:
-        serializedVersion: 2
-        x: 1500
-        y: 740
-        width: 500
-        height: 370
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 8d3f51dda7c734b4d9b701722aa58c22
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: bob_esponja_dancando_4
-      rect:
-        serializedVersion: 2
-        x: 2000
-        y: 740
-        width: 500
-        height: 370
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 26bc7b409522f7141b0326b9921de0a0
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: bob_esponja_dancando_5
+      name: trofeu_5
       rect:
         serializedVersion: 2
         x: 0
-        y: 370
-        width: 500
-        height: 370
+        y: 250
+        width: 250
+        height: 250
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -257,19 +257,39 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b483fb5bef1fb7f47b9d64257cd533dc
+      spriteID: 3440e05aaf4275e408b63f4555bdd954
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: bob_esponja_dancando_6
+      name: trofeu_6
+      rect:
+        serializedVersion: 2
+        x: 250
+        y: 250
+        width: 250
+        height: 250
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4a5f90514089b8548a18ab600e8872b8
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: trofeu_7
       rect:
         serializedVersion: 2
         x: 500
-        y: 370
-        width: 500
-        height: 370
+        y: 250
+        width: 250
+        height: 250
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -277,19 +297,39 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 825d317c23746f043b5c3f97c92c6477
+      spriteID: b779972f1a0fe5c47905ffa049ab3b3a
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: bob_esponja_dancando_7
+      name: trofeu_8
+      rect:
+        serializedVersion: 2
+        x: 750
+        y: 250
+        width: 250
+        height: 250
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bc86ef0150bc9144b8ce429d98725373
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: trofeu_9
       rect:
         serializedVersion: 2
         x: 1000
-        y: 370
-        width: 500
-        height: 370
+        y: 250
+        width: 250
+        height: 250
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -297,59 +337,19 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 455f1342acc3e1940a200f78b94144ee
+      spriteID: 0ca5120b5d4dedb4facc3715116f26d2
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: bob_esponja_dancando_8
-      rect:
-        serializedVersion: 2
-        x: 1500
-        y: 370
-        width: 500
-        height: 370
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: f9ee35e7583f57b4fbd1bf3e895c926b
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: bob_esponja_dancando_9
-      rect:
-        serializedVersion: 2
-        x: 2000
-        y: 370
-        width: 500
-        height: 370
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: bb184b2f4e14b6a4d942fda4c78181be
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: bob_esponja_dancando_10
+      name: trofeu_10
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 500
-        height: 370
+        width: 250
+        height: 250
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -357,19 +357,39 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 05dc34c8295934a4e918d37b4110052d
+      spriteID: c52e8f1c4c289584ab16803f9ece8b8b
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: bob_esponja_dancando_11
+      name: trofeu_11
+      rect:
+        serializedVersion: 2
+        x: 250
+        y: 0
+        width: 250
+        height: 250
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0c3e57ea1d0b2044bae2f5080ad2f17f
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: trofeu_12
       rect:
         serializedVersion: 2
         x: 500
         y: 0
-        width: 500
-        height: 370
+        width: 250
+        height: 250
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -377,19 +397,39 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f1ac3939c58c8b346a4be464de18556e
+      spriteID: 18f73b15cc59b6b4ab1218f9645d3baa
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: bob_esponja_dancando_12
+      name: trofeu_13
+      rect:
+        serializedVersion: 2
+        x: 750
+        y: 0
+        width: 250
+        height: 250
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 29e3c903ce905764d9a73817b78e44ea
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: trofeu_14
       rect:
         serializedVersion: 2
         x: 1000
         y: 0
-        width: 500
-        height: 370
+        width: 250
+        height: 250
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -397,47 +437,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ef1d1a6f1b61ff54883cfe986e5fdc3a
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: bob_esponja_dancando_13
-      rect:
-        serializedVersion: 2
-        x: 1500
-        y: 0
-        width: 500
-        height: 370
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: fd5d545d8287f9b4d9612b066f6aa5fd
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: bob_esponja_dancando_14
-      rect:
-        serializedVersion: 2
-        x: 2000
-        y: 0
-        width: 500
-        height: 370
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: e5a8614189a25bb449fc93694c33830b
+      spriteID: 71815ed3148582d47ad7fd0d6da4967b
       vertices: []
       indices: 
       edges: []
@@ -445,7 +445,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 36757e9a2336c934e80b9eae6a606cd9
+    spriteID: e28c3a58fc5fc2245a49d68e4a16192e
     vertices: []
     indices: 
     edges: []

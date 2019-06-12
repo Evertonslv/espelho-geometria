@@ -98,6 +98,7 @@ public class UIArrastar : MonoBehaviour
             }
         }
 
+
         if (isArrasta)
         {
             objComponente = objetoArrasta.GetComponent<RectTransform>();
@@ -129,6 +130,7 @@ public class UIArrastar : MonoBehaviour
                
                 if (scrollView != null) {
                     if (ObjetoSobreposLixeira())
+
                         Destroy(objetoArrasta.gameObject);
                 }
 
@@ -147,9 +149,6 @@ public class UIArrastar : MonoBehaviour
     }
 
     private Vector2 GetSizeObjeto() {
-        //int widthProporcional = Mathf.RoundToInt(widthObj+(Screen.width*0.30f));
-        //int hightProporcional = Mathf.RoundToInt(HeightObj+(Screen.height*0.30f));
-
         int widthProporcional = Mathf.RoundToInt(widthObj+180);
         int hightProporcional = Mathf.RoundToInt(HeightObj+180);
 
@@ -205,7 +204,7 @@ public class UIArrastar : MonoBehaviour
     }
 
     private bool MouseSobreposLixeira() {
-        return (Input.mousePosition.x < (lixeira.position.x + lixeira.rect.width) &&
+        return (Input.mousePosition.x < (lixeira.position.x + lixeira.rect.width) && 
                     Input.mousePosition.y < (lixeira.position.y + lixeira.rect.height));
     }
     
