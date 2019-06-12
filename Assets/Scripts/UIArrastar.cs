@@ -44,7 +44,7 @@ public class UIArrastar : MonoBehaviour
 
     private Image objBotaoAvancar;
 
-    private GameObject scroll = null, quad = null;
+    private GameObject scroll = null, quad = null, compareBtn = null;
 
     private void Start()
     {
@@ -65,6 +65,7 @@ public class UIArrastar : MonoBehaviour
 
         scroll = GameObject.Find("/Canvas/Scroll View");
         quad = GameObject.Find("/Canvas/Quad");
+        compareBtn = GameObject.Find("/Canvas/botao_avancar"); ;
     }
 
     // Update is called once per frame
@@ -112,12 +113,11 @@ public class UIArrastar : MonoBehaviour
             {
                 scroll.SetActive(false);
                 quad.SetActive(false);
+                compareBtn.SetActive(false);
 
                 File.Delete(Application.dataPath + "/OpenCVForUnity/Examples/Resources/ScreenCapture.jpg");
-
                 ScreenCapture.CaptureScreenshot(Application.dataPath + "/OpenCVForUnity/Examples/Resources/ScreenCapture.jpg", 2);
-                //scroll.SetActive(true);
-                //quad.SetActive(true);
+                
                 isSalvo = true;
             }
         }
@@ -145,6 +145,7 @@ public class UIArrastar : MonoBehaviour
         {
             scroll.SetActive(true);
             quad.SetActive(true);
+            compareBtn.SetActive(true);
         }
     }
 
