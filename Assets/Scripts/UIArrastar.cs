@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using System.Linq;
+using System.IO;
 
 public class UIArrastar : MonoBehaviour
 {
@@ -22,6 +23,8 @@ public class UIArrastar : MonoBehaviour
     //Imagem do objeto
     private Image objetoArrastaImg;
 
+    private bool isSalvo = false;
+
     //Objeto onde fica os objetos de imagem
     private Transform scrollView;
 
@@ -37,20 +40,31 @@ public class UIArrastar : MonoBehaviour
 
     private float HeightObj;
 
+    private Image objLixeira;
+
+    private Image objBotaoAvancar;
+
+    private GameObject scroll = null, quad = null;
+
     private void Start()
     {
-        GameObject scroll = GameObject.Find("/Canvas/Scroll View/Viewport/imagens");
-        scrollView = scroll.transform;
+        GameObject scrollImg = GameObject.Find("/Canvas/Scroll View/Viewport/imagens");
+        scrollView = scrollImg.transform;
 
-        var objLixeira = Component.FindObjectsOfType<Image>().ToList().Find( x=>x.name == "lixeira");
+        objLixeira = Component.FindObjectsOfType<Image>().ToList().Find(x => x.name == "lixeira");
         lixeira = objLixeira.GetComponent<RectTransform>();
 
-        scroll = null;
+        var objBtAvancar = Component.FindObjectsOfType<Button>().ToList().Find(x => x.name == "botao_avancar");
+        objBotaoAvancar = objBtAvancar.GetComponent<Image>();
+
+        scrollImg = null;
 
         GameObject obj = GameObject.Find("/Canvas/objetos_desenho");
         containerDesenho = obj.transform;
         obj = null;
 
+        scroll = GameObject.Find("/Canvas/Scroll View");
+        quad = GameObject.Find("/Canvas/Quad");
     }
 
     // Update is called once per frame
@@ -67,6 +81,7 @@ public class UIArrastar : MonoBehaviour
                 
                 posicaoOriginal = objetoArrasta.position;
                 objetoArrastaImg = objetoArrasta.GetComponent<Image>();
+                objLixeira.enabled = true;
 
                 if (objetoArrasta.parent.name == "imagens")
                 {
@@ -86,8 +101,24 @@ public class UIArrastar : MonoBehaviour
         if (isArrasta)
         {
             objComponente = objetoArrasta.GetComponent<RectTransform>();
-            objComponente.sizeDelta = GetSizeObjeto();
+            //objComponente.sizeDelta = GetSizeObjeto();
             objetoArrasta.position = GetPositionObjeto();
+            isSalvo = false;
+        }
+        else
+        {
+            if (!isSalvo)
+            {
+                scroll.SetActive(false);
+                quad.SetActive(false);
+
+                File.Delete(Application.dataPath + "/OpenCVForUnity/Examples/Resources/ScreenCapture.jpg");
+
+                ScreenCapture.CaptureScreenshot(Application.dataPath + "/OpenCVForUnity/Examples/Resources/ScreenCapture.jpg", 2);
+                //scroll.SetActive(true);
+                //quad.SetActive(true);
+                isSalvo = true;
+            }
         }
 
         if (Input.GetMouseButtonUp(0))
@@ -96,15 +127,22 @@ public class UIArrastar : MonoBehaviour
             {
                 objetoArrastaImg.raycastTarget = true;
                
-                if (scrollView != null) {                   
-                    if (ObjetoSobreposLixeira()) Destroy(objetoArrasta.gameObject);
+                if (scrollView != null) {
+                    if (ObjetoSobreposLixeira())
+                        Destroy(objetoArrasta.gameObject);
                 }
 
                 objetoArrasta = null;
-
             }
 
             isArrasta = false;
+            objLixeira.enabled = false;
+        }
+
+        if (isSalvo && File.Exists(Application.dataPath + "/OpenCVForUnity/Examples/Resources/ScreenCapture.jpg"))
+        {
+            scroll.SetActive(true);
+            quad.SetActive(true);
         }
     }
 
@@ -117,9 +155,12 @@ public class UIArrastar : MonoBehaviour
 
         // se o objeto saiu do scroll
         if (Input.mousePosition.x < scrollView.position.x)
-            return new Vector2(widthProporcional, hightProporcional);
-        else if(MouseSobreposLixeira())
-            return new Vector2(widthObj, HeightObj);
+        {
+            if (MouseSobreposLixeira())
+                return new Vector2(widthObj, HeightObj);
+            else
+                return new Vector2(widthProporcional, hightProporcional);
+        }
 
         return new Vector2(objComponente.rect.width, objComponente.rect.height);
     }   
@@ -164,12 +205,12 @@ public class UIArrastar : MonoBehaviour
     }
 
     private bool MouseSobreposLixeira() {
-        return (Input.mousePosition.x > lixeira.position.x && 
+        return (Input.mousePosition.x < (lixeira.position.x + lixeira.rect.width) &&
                     Input.mousePosition.y < (lixeira.position.y + lixeira.rect.height));
     }
     
     private bool ObjetoSobreposLixeira() {
-        return (Input.mousePosition.x + (objComponente.rect.width/2) > lixeira.position.x && 
-                    Input.mousePosition.y < (lixeira.position.y + lixeira.rect.height));
+        return ((objComponente.position.x - objComponente.rect.width) < (lixeira.position.x) &&
+                    (objComponente.position.y - objComponente.rect.height) < lixeira.position.y);
     }
 }

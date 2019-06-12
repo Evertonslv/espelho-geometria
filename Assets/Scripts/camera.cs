@@ -14,8 +14,6 @@ public class camera : MonoBehaviour
     /// </summary>
     Mat grayMat;
 
-    Texture2D imgTexture;
-
     /// <summary>
     /// The texture.
     /// </summary>
@@ -46,8 +44,6 @@ public class camera : MonoBehaviour
     {
         webCamTextureToMatHelper = gameObject.GetComponent<WebCamTextureToMatHelper>();
 
-        imgTexture = Resources.Load("triangulo") as Texture2D;
-
         detector = new QRCodeDetector();
 
         #if UNITY_ANDROID && !UNITY_EDITOR
@@ -63,7 +59,6 @@ public class camera : MonoBehaviour
     /// </summary>
     public void OnWebCamTextureToMatHelperInitialized()
     {
-        Debug.Log("OnWebCamTextureToMatHelperInitialized");
 
         Mat webCamTextureMat = webCamTextureToMatHelper.GetMat();
 
@@ -105,7 +100,6 @@ public class camera : MonoBehaviour
     /// </summary>
     public void OnWebCamTextureToMatHelperDisposed()
     {
-        Debug.Log("OnWebCamTextureToMatHelperDisposed");
 
         if (grayMat != null)
             grayMat.Dispose();
@@ -150,14 +144,6 @@ public class camera : MonoBehaviour
 
         if (detector != null)
             detector.Dispose();
-    }
-
-    /// <summary>
-    /// Raises the change camera button click event.
-    /// </summary>
-    public void OnChangeCameraButtonClick()
-    {
-        webCamTextureToMatHelper.requestedIsFrontFacing = !webCamTextureToMatHelper.IsFrontFacing();
     }
 
     public Texture2D getTextura()

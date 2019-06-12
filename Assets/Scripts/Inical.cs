@@ -1,19 +1,21 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.IO;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using System.Linq;
+using OpenCVForUnity.UnityUtils;
+using System;
+using System.Collections.Generic;
+using UnityEditor;
+
 public class Inical : MonoBehaviour
 {
 
-    GameObject scroll = null;
-
+    private Reconhecimento rec = null;
     void Start() {
-        scroll = GameObject.Find("/Canvas/Scroll View");
+        rec = new Reconhecimento();
     }
 
     // Update is called once per frame
-    void Update() { }
+    void Update() {}
 
     public void iniciarBtn()
     {
@@ -22,22 +24,42 @@ public class Inical : MonoBehaviour
 
     public void analizarImagemBtn(camera camera)
     {
-        SpriteRenderer spriteAguarde = Component.FindObjectsOfType<SpriteRenderer>().ToList().Find( x=>x.name == "sprite_aguardando");
-        
-        // scroll.SetActive(false);
-        // Texture2D textura = camera.getTextura();
-        // camera.OnWebCamTextureToMatHelperDisposed();
-             
-        // Texture2D containerImgs = ScreenCapture.CaptureScreenshotAsTexture();
-        // ScreenCapture.CaptureScreenshot("teste.png", 2);
-        
-        spriteAguarde.enabled = true;
-    
-        // var verificaImagem = new Reconhecimento().verificaImagem(textura, containerImgs);
+        // SpriteRenderer spriteAguarde = Component.FindObjectsOfType<SpriteRenderer>().ToList().Find( x=>x.name == "sprite_aguardando");
+        //Texture2D containerImgs = ScreenCapture.CaptureScreenshotAsTexture(2);
+        Texture2D fotoCamera = camera.getTextura();
+        Texture2D imagemScreen = Resources.Load("ScreenCapture") as Texture2D;
 
-        // if (containerImgs != null && verificaImagem)
-        //     SceneManager.LoadScene("Tela Accept");
-        // else
-        //     SceneManager.LoadScene("Tela Error");
+        if (imagemScreen == null)
+            return;
+        
+        // Habilita a possibilidade de usar a imagem
+        SetTextureImporterFormat(imagemScreen, true);
+
+        var bytes = imagemScreen.EncodeToJPG();
+        File.WriteAllBytes("imagem1_tratamento.png", bytes);
+
+        //spriteAguarde.enabled = true;
+
+       var verificaImagem = rec.verificaImagem(fotoCamera, imagemScreen);
+
+        if (verificaImagem)
+            SceneManager.LoadScene("Tela Accept");
+         else
+             SceneManager.LoadScene("Tela Error");
+
+    }
+
+    public static void SetTextureImporterFormat(Texture2D texture, bool isReadable)
+    {
+        if (null == texture) return;
+
+        string assetPath = AssetDatabase.GetAssetPath(texture);
+        var tImporter = AssetImporter.GetAtPath(assetPath) as TextureImporter;
+        if (tImporter != null)
+        {
+            tImporter.isReadable = isReadable;
+            AssetDatabase.ImportAsset(assetPath);
+            AssetDatabase.Refresh();
+        }
     }
 }
