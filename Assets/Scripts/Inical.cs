@@ -22,7 +22,7 @@ public class Inical : MonoBehaviour
 
     public void analizarImagemBtn(camera camera)
     {
-        SpriteRenderer spriteAguarde = Component.FindObjectsOfType<SpriteRenderer>().ToList().Find( x=>x.name == "sprite_aguardando");
+        //SpriteRenderer spriteAguarde = Component.FindObjectsOfType<SpriteRenderer>().ToList().Find( x=>x.name == "sprite_aguardando");
         
         // scroll.SetActive(false);
         // Texture2D textura = camera.getTextura();
@@ -31,12 +31,13 @@ public class Inical : MonoBehaviour
         // Texture2D containerImgs = ScreenCapture.CaptureScreenshotAsTexture();
         // ScreenCapture.CaptureScreenshot("teste.png", 2);
         
-        spriteAguarde.enabled = true;
+        //spriteAguarde.enabled = true;
     
         // var verificaImagem = new Reconhecimento().verificaImagem(textura, containerImgs);
 
         // if (containerImgs != null && verificaImagem)
-        //     SceneManager.LoadScene("Tela Accept");
+        Debug.Log("dgsdgsdg");
+             SceneManager.LoadScene("Tela Accept");
         // else
         //     SceneManager.LoadScene("Tela Error");
     }
