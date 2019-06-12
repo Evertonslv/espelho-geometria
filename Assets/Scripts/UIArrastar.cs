@@ -37,13 +37,20 @@ public class UIArrastar : MonoBehaviour
 
     private float HeightObj;
 
+    private Image objLixeira;
+
+    private Image objBotaoAvancar;
+
     private void Start()
     {
         GameObject scroll = GameObject.Find("/Canvas/Scroll View/Viewport/imagens");
         scrollView = scroll.transform;
 
-        var objLixeira = Component.FindObjectsOfType<Image>().ToList().Find( x=>x.name == "lixeira");
+        objLixeira = Component.FindObjectsOfType<Image>().ToList().Find( x=>x.name == "lixeira");
         lixeira = objLixeira.GetComponent<RectTransform>();
+
+        var objBtAvancar = Component.FindObjectsOfType<Button>().ToList().Find( x=>x.name == "botao_avancar");
+        objBotaoAvancar = objBtAvancar.GetComponent<Image>();
 
         scroll = null;
 
@@ -67,6 +74,7 @@ public class UIArrastar : MonoBehaviour
                 
                 posicaoOriginal = objetoArrasta.position;
                 objetoArrastaImg = objetoArrasta.GetComponent<Image>();
+                objLixeira.enabled = true;
 
                 if (objetoArrasta.parent.name == "imagens")
                 {
@@ -83,6 +91,7 @@ public class UIArrastar : MonoBehaviour
             }
         }
 
+
         if (isArrasta)
         {
             objComponente = objetoArrasta.GetComponent<RectTransform>();
@@ -97,7 +106,8 @@ public class UIArrastar : MonoBehaviour
                 objetoArrastaImg.raycastTarget = true;
                
                 if (scrollView != null) {                   
-                    if (ObjetoSobreposLixeira()) Destroy(objetoArrasta.gameObject);
+                    if (ObjetoSobreposLixeira()) 
+                        Destroy(objetoArrasta.gameObject);
                 }
 
                 objetoArrasta = null;
@@ -105,21 +115,21 @@ public class UIArrastar : MonoBehaviour
             }
 
             isArrasta = false;
+            objLixeira.enabled = false;
         }
     }
 
     private Vector2 GetSizeObjeto() {
-        //int widthProporcional = Mathf.RoundToInt(widthObj+(Screen.width*0.30f));
-        //int hightProporcional = Mathf.RoundToInt(HeightObj+(Screen.height*0.30f));
-
         int widthProporcional = Mathf.RoundToInt(widthObj+180);
         int hightProporcional = Mathf.RoundToInt(HeightObj+180);
 
         // se o objeto saiu do scroll
-        if (Input.mousePosition.x < scrollView.position.x)
-            return new Vector2(widthProporcional, hightProporcional);
-        else if(MouseSobreposLixeira())
-            return new Vector2(widthObj, HeightObj);
+        if (Input.mousePosition.x < scrollView.position.x) {
+            if(MouseSobreposLixeira())
+                return new Vector2(widthObj, HeightObj);
+            else
+                return new Vector2(widthProporcional, hightProporcional);
+        }
 
         return new Vector2(objComponente.rect.width, objComponente.rect.height);
     }   
@@ -164,12 +174,12 @@ public class UIArrastar : MonoBehaviour
     }
 
     private bool MouseSobreposLixeira() {
-        return (Input.mousePosition.x > lixeira.position.x && 
+        return (Input.mousePosition.x < (lixeira.position.x + lixeira.rect.width) && 
                     Input.mousePosition.y < (lixeira.position.y + lixeira.rect.height));
     }
     
     private bool ObjetoSobreposLixeira() {
-        return (Input.mousePosition.x + (objComponente.rect.width/2) > lixeira.position.x && 
-                    Input.mousePosition.y < (lixeira.position.y + lixeira.rect.height));
+        return ((objComponente.position.x - objComponente.rect.width) < (lixeira.position.x) && 
+                    (objComponente.position.y - objComponente.rect.height) < lixeira.position.y);
     }
 }
