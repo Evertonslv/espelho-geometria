@@ -42,7 +42,7 @@ public class Inical : MonoBehaviour
 
         //spriteAguarde.enabled = true;
 
-       var verificaImagem = rec.verificaImagemContorno(fotoCamera) && rec.verificaImagem(fotoCamera, imagemScreen);
+       var verificaImagem = rec.verificaImagem(fotoCamera, imagemScreen); //rec.verificaImagemContorno(fotoCamera) && 
 
         if (verificaImagem)
             SceneManager.LoadScene("Tela Accept");
