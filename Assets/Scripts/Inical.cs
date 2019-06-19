@@ -24,6 +24,8 @@ public class Inical : MonoBehaviour
 
     public void analizarImagemBtn(camera camera)
     {
+            SceneManager.LoadScene("Tela Error");
+
         // SpriteRenderer spriteAguarde = Component.FindObjectsOfType<SpriteRenderer>().ToList().Find( x=>x.name == "sprite_aguardando");
         //Texture2D containerImgs = ScreenCapture.CaptureScreenshotAsTexture(2);
         Texture2D fotoCamera = camera.getTextura();

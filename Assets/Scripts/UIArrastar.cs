@@ -83,6 +83,7 @@ public class UIArrastar : MonoBehaviour
                 posicaoOriginal = objetoArrasta.position;
                 objetoArrastaImg = objetoArrasta.GetComponent<Image>();
                 objLixeira.enabled = true;
+                objBotaoAvancar.enabled = false;
 
                 if (objetoArrasta.parent.name == "imagens")
                 {
@@ -103,7 +104,7 @@ public class UIArrastar : MonoBehaviour
         if (isArrasta)
         {
             objComponente = objetoArrasta.GetComponent<RectTransform>();
-            //objComponente.sizeDelta = GetSizeObjeto();
+            objComponente.sizeDelta = GetSizeObjeto();
             objetoArrasta.position = GetPositionObjeto();
             isSalvo = false;
         }
@@ -139,6 +140,7 @@ public class UIArrastar : MonoBehaviour
 
             isArrasta = false;
             objLixeira.enabled = false;
+            objBotaoAvancar.enabled = true;
         }
 
         if (isSalvo && File.Exists(Application.dataPath + "/OpenCVForUnity/Examples/Resources/ScreenCapture.jpg"))
