@@ -24,18 +24,21 @@ public class Inical : MonoBehaviour
 
     public void analizarImagemBtn(camera camera)
     {
-            SceneManager.LoadScene("Tela Error");
+            //SceneManager.LoadScene("Tela Error");
 
         // SpriteRenderer spriteAguarde = Component.FindObjectsOfType<SpriteRenderer>().ToList().Find( x=>x.name == "sprite_aguardando");
-        //Texture2D containerImgs = ScreenCapture.CaptureScreenshotAsTexture(2);
+        Texture2D containerImgs = ScreenCapture.CaptureScreenshotAsTexture(2);
         Texture2D fotoCamera = camera.getTextura();
         Texture2D imagemScreen = Resources.Load("ScreenCapture") as Texture2D;
 
         if (imagemScreen == null)
             return;
-        
+
         // Habilita a possibilidade de usar a imagem
-        SetTextureImporterFormat(imagemScreen, true);
+        //SetTextureImporterFormat(imagemScreen, true);
+        imagemScreen  = duplicateTexture(imagemScreen);
+
+        imagemScreen.Apply();
 
         var bytes = imagemScreen.EncodeToJPG();
         File.WriteAllBytes("imagem1_tratamento.png", bytes);
@@ -51,17 +54,39 @@ public class Inical : MonoBehaviour
 
     }
 
-    public static void SetTextureImporterFormat(Texture2D texture, bool isReadable)
+    Texture2D duplicateTexture(Texture2D source)
     {
-        if (null == texture) return;
+        RenderTexture renderTex = RenderTexture.GetTemporary(
+                    source.width,
+                    source.height,
+                    0,
+                    RenderTextureFormat.Default,
+                    RenderTextureReadWrite.Linear);
 
-        string assetPath = AssetDatabase.GetAssetPath(texture);
-        var tImporter = AssetImporter.GetAtPath(assetPath) as TextureImporter;
-        if (tImporter != null)
-        {
-            tImporter.isReadable = isReadable;
-            AssetDatabase.ImportAsset(assetPath);
-            AssetDatabase.Refresh();
-        }
+        Graphics.Blit(source, renderTex);
+        RenderTexture previous = RenderTexture.active;
+        RenderTexture.active = renderTex;
+        Texture2D readableText = new Texture2D(source.width, source.height);
+        readableText.ReadPixels(new Rect(0, 0, renderTex.width, renderTex.height), 0, 0);
+        readableText.Apply();
+        RenderTexture.active = previous;
+        RenderTexture.ReleaseTemporary(renderTex);
+        return readableText;
     }
+
+    //public static void SetTextureImporterFormat(Texture2D texture, bool isReadable)
+    //{
+    //    if (null == texture) return;
+
+    //    string assetPath = AssetDatabase.GetAssetPath(texture);
+    //    var tImporter = AssetImporter.GetAtPath(assetPath) as TextureImporter;
+    //    if (tImporter != null)
+    //    {
+    //        tImporter.isReadable = isReadable;
+    //        AssetDatabase.ImportAsset(assetPath);
+    //        AssetDatabase.Refresh();
+    //    }
+
+    //}
+
 }

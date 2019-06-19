@@ -61,26 +61,26 @@ public class Reconhecimento
         Utils.texture2DToMat(printTela, img2Mat);
 
         Imgproc.GaussianBlur(img1Mat, img1Mat, new Size(5, 5), 0);
-        //Texture2D tex3 = new Texture2D(img1Mat.cols(), img1Mat.rows(), TextureFormat.RGBA32, false);
+        Texture2D tex3 = new Texture2D(img1Mat.cols(), img1Mat.rows(), TextureFormat.RGBA32, false);
         //Utils.matToTexture2D(img1Mat, tex3);
         //bytes = tex3.EncodeToJPG();
         //File.WriteAllBytes("imagem1_tratamento_gaussian.png", bytes);
         Imgproc.threshold(img1Mat, img1Mat, 100, 255, Imgproc.THRESH_BINARY);
-        //tex3 = new Texture2D(img1Mat.cols(), img1Mat.rows(), TextureFormat.RGBA32, false);
-        //Utils.matToTexture2D(img1Mat, tex3);
-        //bytes = tex3.EncodeToJPG();
-        //File.WriteAllBytes("imagem1_tratamento_threshold.png", bytes);
+        tex3 = new Texture2D(img1Mat.cols(), img1Mat.rows(), TextureFormat.RGBA32, false);
+        Utils.matToTexture2D(img1Mat, tex3);
+        bytes = tex3.EncodeToJPG();
+        File.WriteAllBytes("imagem1_tratamento_threshold.png", bytes);
 
         Imgproc.GaussianBlur(img2Mat, img2Mat, new Size(5, 5), 0);
-        //Texture2D tex4 = new Texture2D(img2Mat.cols(), img2Mat.rows(), TextureFormat.RGBA32, false);
+        Texture2D tex4 = new Texture2D(img2Mat.cols(), img2Mat.rows(), TextureFormat.RGBA32, false);
         //Utils.matToTexture2D(img2Mat, tex4);
         //bytes = tex4.EncodeToJPG();
         //File.WriteAllBytes("imagem2_tratamento_gaussian.png", bytes);
         Imgproc.threshold(img2Mat, img2Mat, 240, 255, Imgproc.THRESH_BINARY);
-        //tex4 = new Texture2D(img2Mat.cols(), img2Mat.rows(), TextureFormat.RGBA32, false);
-        //Utils.matToTexture2D(img2Mat, tex4);
-        //bytes = tex4.EncodeToJPG();
-        //File.WriteAllBytes("imagem2_tratamento_threshold.png", bytes);
+        tex4 = new Texture2D(img2Mat.cols(), img2Mat.rows(), TextureFormat.RGBA32, false);
+        Utils.matToTexture2D(img2Mat, tex4);
+        bytes = tex4.EncodeToJPG();
+        File.WriteAllBytes("imagem2_tratamento_threshold.png", bytes);
 
         ORB detector = ORB.create();
         ORB extractor = ORB.create();
