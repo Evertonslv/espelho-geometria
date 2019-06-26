@@ -127,57 +127,57 @@ public class Reconhecimento
         return (total / number_keypoints * 100) >= 70;
     }
 
-    //public bool verificaImagemContorno(Texture2D textParam)
-    //{
-    //    var bytes = textParam.EncodeToJPG();
-    //    File.WriteAllBytes("imagem1_tratamento.png", bytes);
+    public bool verificaImagemContorno(Texture2D textParam)
+    {
+        var bytes = textParam.EncodeToJPG();
+        File.WriteAllBytes("imagem1_tratamento.png", bytes);
 
-    //    Texture2D camFoto = textParam;
+        Texture2D camFoto = textParam;
 
-    //    // Escala de cinza. CV_8UC1
-    //    Mat img1Mat = new Mat(camFoto.height, camFoto.width, CvType.CV_8UC1);
-    //    Utils.texture2DToMat(camFoto, img1Mat);
+        // Escala de cinza. CV_8UC1
+        Mat img1Mat = new Mat(camFoto.height, camFoto.width, CvType.CV_8UC1);
+        Utils.texture2DToMat(camFoto, img1Mat);
 
-    //    Imgproc.GaussianBlur(img1Mat, img1Mat, new Size(5, 5), 0);
-    //    Texture2D tex3 = new Texture2D(img1Mat.cols(), img1Mat.rows(), TextureFormat.RGBA32, false);
-    //    Utils.matToTexture2D(img1Mat, tex3);
-    //    bytes = tex3.EncodeToJPG();
-    //    File.WriteAllBytes("imagem1_tratamento_gaussian.png", bytes);
-    //    Imgproc.threshold(img1Mat, img1Mat, 120, 255, Imgproc.THRESH_BINARY);
-    //    tex3 = new Texture2D(img1Mat.cols(), img1Mat.rows(), TextureFormat.RGBA32, false);
-    //    Utils.matToTexture2D(img1Mat, tex3);
-    //    bytes = tex3.EncodeToJPG();
-    //    File.WriteAllBytes("imagem1_tratamento_threshold.png", bytes);
+        Imgproc.GaussianBlur(img1Mat, img1Mat, new Size(5, 5), 0);
+        Texture2D tex3 = new Texture2D(img1Mat.cols(), img1Mat.rows(), TextureFormat.RGBA32, false);
+        Utils.matToTexture2D(img1Mat, tex3);
+        bytes = tex3.EncodeToJPG();
+        File.WriteAllBytes("imagem1_tratamento_gaussian.png", bytes);
+        Imgproc.threshold(img1Mat, img1Mat, 120, 255, Imgproc.THRESH_BINARY);
+        tex3 = new Texture2D(img1Mat.cols(), img1Mat.rows(), TextureFormat.RGBA32, false);
+        Utils.matToTexture2D(img1Mat, tex3);
+        bytes = tex3.EncodeToJPG();
+        File.WriteAllBytes("imagem1_tratamento_threshold.png", bytes);
 
-    //    List<MatOfPoint> srcContours = new List<MatOfPoint>();
-    //    Mat srcHierarchy = new Mat();
+        List<MatOfPoint> srcContours = new List<MatOfPoint>();
+        Mat srcHierarchy = new Mat();
 
-    //    Imgproc.findContours(img1Mat, srcContours, srcHierarchy, Imgproc.RETR_TREE, Imgproc.CHAIN_APPROX_SIMPLE);
+        Imgproc.findContours(img1Mat, srcContours, srcHierarchy, Imgproc.RETR_TREE, Imgproc.CHAIN_APPROX_SIMPLE);
 
-    //    int totalB = 0, totalQ = 0, totalR = 0, totalP;
+        int totalB = 0, totalQ = 0, totalR = 0, totalP;
 
-    //    for (int i = 0; i < srcContours.Count; i++)
-    //    {
-    //        Imgproc.drawContours(img1Mat, srcContours, i, new Scalar(100, 100, 100), 2, 8, srcHierarchy, 0, new Point());
-    //    }
-    //    tex3 = new Texture2D(img1Mat.cols(), img1Mat.rows(), TextureFormat.RGBA32, false);
-    //    Utils.matToTexture2D(img1Mat, tex3);
-    //    bytes = tex3.EncodeToJPG();
-    //    File.WriteAllBytes("imagem1_tratamento_findcountors.png", bytes);
+        for (int i = 0; i < srcContours.Count; i++)
+        {
+            Imgproc.drawContours(img1Mat, srcContours, i, new Scalar(100, 100, 100), 2, 8, srcHierarchy, 0, new Point());
+        }
+        tex3 = new Texture2D(img1Mat.cols(), img1Mat.rows(), TextureFormat.RGBA32, false);
+        Utils.matToTexture2D(img1Mat, tex3);
+        bytes = tex3.EncodeToJPG();
+        File.WriteAllBytes("imagem1_tratamento_findcountors.png", bytes);
 
-    //    for (int i = 0; i < srcContours.Count; i++)
-    //    {
-    //        MatOfPoint2f mont = new MatOfPoint2f(srcContours[i].toArray());
-    //        var aprox = new MatOfPoint2f();
-    //        Imgproc.approxPolyDP(mont, aprox, 0.01 * Imgproc.arcLength(mont, true), true);
-    //        Debug.Log(aprox.size());
+        for (int i = 0; i < srcContours.Count; i++)
+        {
+            MatOfPoint2f mont = new MatOfPoint2f(srcContours[i].toArray());
+            var aprox = new MatOfPoint2f();
+            Imgproc.approxPolyDP(mont, aprox, 0.01 * Imgproc.arcLength(mont, true), true);
+            Debug.Log(aprox.size());
 
-    //        //if (aprox.size().area == 3)
-    //        //{
-    //        //    Debug.Log("Triangulo");
-    //        //}
-    //    }
+            //if (aprox.size().area == 3)
+            //{
+            //    Debug.Log("Triangulo");
+            //}
+        }
 
-    //    return false;
-    //}
+        return false;
+    }
 }

@@ -39,6 +39,8 @@ public class Inical : MonoBehaviour
         var bytes = imagemScreen.EncodeToJPG();
         File.WriteAllBytes("imagem_tratamento.png", bytes);
 
+        //rec.verificaImagemContorno(imagemScreen);
+
         //spriteAguarde.enabled = true;
         var verificaImagem = false;
         try
