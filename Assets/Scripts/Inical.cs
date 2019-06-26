@@ -4,7 +4,7 @@ using UnityEngine.SceneManagement;
 using OpenCVForUnity.UnityUtils;
 using System;
 using System.Collections.Generic;
-using UnityEditor;
+using UnityEngine.UI;
 
 public class Inical : MonoBehaviour
 {
@@ -24,69 +24,54 @@ public class Inical : MonoBehaviour
 
     public void analizarImagemBtn(camera camera)
     {
-            //SceneManager.LoadScene("Tela Error");
-
-        // SpriteRenderer spriteAguarde = Component.FindObjectsOfType<SpriteRenderer>().ToList().Find( x=>x.name == "sprite_aguardando");
-        Texture2D containerImgs = ScreenCapture.CaptureScreenshotAsTexture(2);
         Texture2D fotoCamera = camera.getTextura();
-        Texture2D imagemScreen = Resources.Load("ScreenCapture") as Texture2D;
+        //Texture2D imagemScreen = Resources.Load("ScreenCapture") as Texture2D;
 
-        if (imagemScreen == null)
-            return;
+        //if (imagemScreen == null)
+        //    return;
+
+        //imagemScreen = copiar(imagemScreen);
+        Texture2D imagemScreen = UIArrastar.teste;
 
         // Habilita a possibilidade de usar a imagem
         //SetTextureImporterFormat(imagemScreen, true);
-        imagemScreen  = duplicateTexture(imagemScreen);
-
-        imagemScreen.Apply();
-
+        //imagemScreen  = duplicateTexture(imagemScreen)
         var bytes = imagemScreen.EncodeToJPG();
-        File.WriteAllBytes("imagem1_tratamento.png", bytes);
+        File.WriteAllBytes("imagem_tratamento.png", bytes);
 
         //spriteAguarde.enabled = true;
-
-       var verificaImagem = rec.verificaImagem(fotoCamera, imagemScreen); //rec.verificaImagemContorno(fotoCamera) && 
+        var verificaImagem = false;
+        try
+        {
+            verificaImagem = rec.verificaImagem(fotoCamera, imagemScreen); //rec.verificaImagemContorno(fotoCamera) && 
+        }
+        catch
+        { 
+        }
 
         if (verificaImagem)
             SceneManager.LoadScene("Tela Accept");
          else
              SceneManager.LoadScene("Tela Error");
-
     }
 
-    Texture2D duplicateTexture(Texture2D source)
+    public Texture2D copiar(Texture2D texture)
     {
-        RenderTexture renderTex = RenderTexture.GetTemporary(
-                    source.width,
-                    source.height,
+        // Cria um RenderTexture temporário do mesmo tamanho que a textura 
+        RenderTexture tmp = RenderTexture.GetTemporary(
+                    texture.width,
+                    texture.height,
                     0,
                     RenderTextureFormat.Default,
                     RenderTextureReadWrite.Linear);
 
-        Graphics.Blit(source, renderTex);
+        Graphics.Blit(texture, tmp);
         RenderTexture previous = RenderTexture.active;
-        RenderTexture.active = renderTex;
-        Texture2D readableText = new Texture2D(source.width, source.height);
-        readableText.ReadPixels(new Rect(0, 0, renderTex.width, renderTex.height), 0, 0);
-        readableText.Apply();
+        Texture2D myTexture2D = new Texture2D(texture.width, texture.height);
+        myTexture2D.ReadPixels(new Rect(0, 0, tmp.width, tmp.height), 0, 0);
+        myTexture2D.Apply();
         RenderTexture.active = previous;
-        RenderTexture.ReleaseTemporary(renderTex);
-        return readableText;
+        RenderTexture.ReleaseTemporary(tmp);
+        return myTexture2D;
     }
-
-    //public static void SetTextureImporterFormat(Texture2D texture, bool isReadable)
-    //{
-    //    if (null == texture) return;
-
-    //    string assetPath = AssetDatabase.GetAssetPath(texture);
-    //    var tImporter = AssetImporter.GetAtPath(assetPath) as TextureImporter;
-    //    if (tImporter != null)
-    //    {
-    //        tImporter.isReadable = isReadable;
-    //        AssetDatabase.ImportAsset(assetPath);
-    //        AssetDatabase.Refresh();
-    //    }
-
-    //}
-
 }

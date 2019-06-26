@@ -46,6 +46,8 @@ public class UIArrastar : MonoBehaviour
 
     private GameObject scroll = null, quad = null, compareBtn = null;
 
+    public static Texture2D teste;
+
     private void Start()
     {
         GameObject scrollImg = GameObject.Find("/Canvas/Scroll View/Viewport/imagens");
@@ -116,9 +118,10 @@ public class UIArrastar : MonoBehaviour
                 quad.SetActive(false);
                 compareBtn.SetActive(false);
 
-                File.Delete(Application.dataPath + "/OpenCVForUnity/Examples/Resources/ScreenCapture.jpg");
-                ScreenCapture.CaptureScreenshot(Application.dataPath + "/OpenCVForUnity/Examples/Resources/ScreenCapture.jpg", 2);
-                
+                //File.Delete(Application.dataPath + "/OpenCVForUnity/Examples/Resources/ScreenCapture.jpg");                
+                //ScreenCapture.CaptureScreenshot(Application.dataPath + "/OpenCVForUnity/Examples/Resources/ScreenCapture.jpg", 2);
+                UIArrastar.teste = ScreenCapture.CaptureScreenshotAsTexture(2);
+
                 isSalvo = true;
             }
         }

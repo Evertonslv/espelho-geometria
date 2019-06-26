@@ -44,9 +44,9 @@ public class Reconhecimento
     public bool verificaImagem(Texture2D textParam, Texture2D textParam2)
     {
         var bytes = textParam.EncodeToJPG();
-        File.WriteAllBytes("imagem1_tratamento.png", bytes);
-        bytes = textParam2.EncodeToJPG();
-        File.WriteAllBytes("imagem2_tratamento.png", bytes);
+        //File.WriteAllBytes("imagem1_tratamento.png", bytes);
+        //bytes = textParam2.EncodeToJPG();
+        //File.WriteAllBytes("imagem2_tratamento.png", bytes);
 
         //Texture2D imgTexture = Resources.Load("circulo") as Texture2D;
         Texture2D camFoto = textParam;
